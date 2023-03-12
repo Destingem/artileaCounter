@@ -1,0 +1,112 @@
+:root {
+  --dark-cl: #1b1d43;
+  --orange-cl: #ff5c35;
+  --gray-cl: #bcbec0;
+  --light-cl: #e6e7e8;
+  --dark-purple-cl: #281c64;
+  --purple-cl: #612096;
+  --yellow-cl: #f8c93d;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-cl);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-purple-cl);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-cl);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button,
+a {
+  outline: none;
+  text-decoration: none;
+  border: none;
+}
+
+ul, li {
+  text-decoration: none;
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+// calander css
+.fc-toolbar-title {
+  color: var(--light-cl);
+  font-size: 1.2rem !important;
+  font-weight: bold;
+  &::before {
+    content: "Upcoming events for ";
+  }
+}
+
+.fc .fc-button-primary {
+  background-color: var(--dark-cl);
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  font-weight: 600;
+  &:hover {
+    background-color: var(--dark-purple-cl);
+  }
+  &:focus,
+  &:not(:disabled):active:focus {
+    box-shadow: none;
+  }
+}
+
+.fc .fc-toolbar {
+  background-color: transparent;
+  padding: 0 20px;
+}
+
+.fc .fc-view-harness {
+  background-color: white;
+}
+
+.fc.fc-media-screen {
+  background-color: var(--orange-cl);
+  padding: 20px 0 0 0;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.5);
+  // max-width: 800px;
+}
+
+.fc-h-event {
+  background-color: var(--dark-cl);
+  border-color: var(--dark-cl);
+  text-transform: capitalize;
+}

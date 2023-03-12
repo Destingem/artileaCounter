@@ -1,0 +1,45 @@
+.index {
+    [data-style="informations-div"] {
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+
+        [data-style="card"] {
+            padding: 0 30px 30px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 0 5px rgba($color: #000000, $alpha: .2);
+            display: flex;
+            flex-direction: column;
+            font-size: 1.2rem;
+            font-weight: bolder;
+            position: relative;
+            overflow: hidden;
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                padding: 10px 0 20px;
+                text-transform: capitalize;
+            }
+            [data-style="details"] {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+            svg {
+                font-size: 32px;
+            }
+            i {
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 20px;
+                top: 100%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

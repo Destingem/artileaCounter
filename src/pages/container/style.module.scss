@@ -1,0 +1,113 @@
+.index {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto;
+  max-width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 57px calc(100vh - 57px);
+    height: 100%;
+    width: 100%;
+
+    [data-style="main"] {
+        overflow: auto;
+        padding: 10px;
+        max-height: 100%;
+    }
+
+    [data-style="header"] {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        padding-left: 5px;
+        border-bottom: 1px solid rgba($color: #000000, $alpha: .2);
+        box-shadow: 0 3px 3px rgba($color: #000000, $alpha: .2);
+    
+        h3 {
+          font-size: 1.2rem;
+          font-weight: bolder;
+          background-color: var(--orange-cl);
+          padding: 5px 10px;
+          border-radius: 5px;
+          text-transform: uppercase;
+          color: var(--light-cl);
+          box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.5);
+        }
+    
+        div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+    
+          [data-style="user"] {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            svg {
+              color: var(--dark-cl);
+              cursor: unset;
+              pointer-events: none;
+            }
+          }
+    
+          span {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+          }
+          svg {
+            font-size: 26px;
+            color: var(--orange-cl);
+            cursor: pointer;
+            &:hover {
+                transform: scale(1.1);
+                transition: transform .2s ease-in-out;
+            }
+          }
+        }
+      }
+
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-purple-cl);
+  img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  a {
+    color: var(--light-cl);
+    padding: 12px;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: capitalize;
+    &:hover {
+      padding-left: 25px;
+      transition: padding 0.2s ease-in-out;
+      background-color: rgba($color: #ff5c35, $alpha: 0.6);
+    }
+    svg {
+      font-size: 26px;
+    }
+  }
+}
+
+.active {
+  padding-left: 25px !important;
+  transition: padding 0.2s ease-in-out;
+  background-color: rgba($color: #ff5c35, $alpha: 0.8);
+  pointer-events: none;
+}

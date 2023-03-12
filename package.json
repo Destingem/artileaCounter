@@ -1,0 +1,117 @@
+{
+  "name": "scout-shooter",
+  "version": "1.0.0",
+  "private": true,
+  "main": "electron/main.js",
+  "homepage": "./",
+  "build": {
+    "appId": "scout-shooter",
+    "linux": {
+      "category": "Utility",
+      "target": [
+        "deb",
+        "appImage"
+      ]
+    },
+    "deb": {
+      "depends": [
+        "gconf2",
+        "gconf-service",
+        "libnotify4",
+        "libappindicator1",
+        "libxtst6",
+        "libnss3"
+      ]
+    },
+    "win": {
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "DataBase/**/*",
+      "electron/*",
+      "node_modules/**/*",
+      "public/**/*",
+      "src/**/*",
+      "package.json",
+      ".gitignore",
+      "icon.ico",
+      "package-lock.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "directories": {
+      "buildResources": "build"
+    }
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.5",
+    "@fullcalendar/core": "^6.0.3",
+    "@fullcalendar/daygrid": "^6.0.3",
+    "@fullcalendar/react": "^6.0.4",
+    "@mantine/core": "^5.10.4",
+    "@mantine/hooks": "^5.10.4",
+    "@material-ui/core": "^4.12.4",
+    "@mui/joy": "^5.0.0-alpha.64",
+    "@mui/material": "^5.11.5",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "bcrypt": "^5.1.0",
+    "eas": "^0.1.0",
+    "electron-is-dev": "^2.0.0",
+    "mongoose": "^6.8.4",
+    "onchange": "^7.1.0",
+    "prettier": "^2.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.42.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.7.0",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
+    "sass": "^1.57.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "start": "concurrently -k \"SET BROWSER=none&&npm run dev\" \"npm:electron\"",
+    "electron": "wait-on tcp:3000 && electron .",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=electron/main.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@iconify/react": "^4.0.1",
+    "concurrently": "^7.6.0",
+    "electron": "^22.0.3",
+    "electron-builder": "^23.6.0",
+    "wait-on": "^7.0.1"
+  }
+}
