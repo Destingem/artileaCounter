@@ -17,14 +17,14 @@ function Links() {
         to="/app/"
       >
         <Icon icon="material-symbols:dashboard-customize-rounded" />
-        <span>dashboard</span>
+        <span>Přehled</span>
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? style.active : "")}
         to="/app/competition"
       >
         <Icon icon="pixelarticons:tournament" />
-        <span>competition</span>
+        <span>Závody</span>
       </NavLink>
       {/*  <NavLink
         className={({ isActive }) => (isActive ? style.active : "")}
@@ -38,28 +38,28 @@ function Links() {
         to="/app/peoples"
       >
         <Icon icon="ph:users-three-fill" />
-        <span>peoples</span>
+        <span>Lidé</span>
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? style.active : "")}
         to="/app/discipline"
       >
         <Icon icon="material-symbols:text-snippet-rounded" />
-        <span>discipline</span>
+        <span>Disciplíny</span>
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? style.active : "")}
         to="/app/ShootingRange"
       >
         <Icon icon="eos-icons:troubleshooting" />
-        <span>shooting range</span>
+        <span>Střelnice</span>
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? style.active : "")}
         to="/app/clubs"
       >
         <Icon icon="bi:microsoft-teams" />
-        <span>clubs</span>
+        <span>Kluby</span>
       </NavLink>
       {/* <NavLink
         className={({ isActive }) => (isActive ? style.active : "")}

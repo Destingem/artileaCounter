@@ -7,20 +7,29 @@ import { selectUser } from "../../reducers/appSlice";
 import { Button } from "@mui/material";
 import { resetUser } from "../../reducers/appSlice";
 import { Navigate } from "react-router-dom";
-
+import { Kbd, Select } from "@mantine/core";
+import { AiOutlineSearch } from "react-icons/ai";
+import { useHotkeys } from "@mantine/hooks";
+import Search from "./Search";
 function Header({ path }) {
   const dispatch = useDispatch();
+  
   const user = useSelector(selectUser);
-
+  
   if (!user) return <Navigate replace to="/" />;
   return (
     <div data-style="header">
       <h3>{path ? path : "dashboard"}</h3>
-      <div>
+     
+     <Search />
+      
+    
+      <div style={{display: "flex"}}>
         <div data-style="user">
           <span>{user}</span>
           <Icon icon="mdi:user-circle" />
         </div>
+       
         <Button onClick={()=>{
           dispatch(resetUser())
         }} style={{ display: "flex" }}>

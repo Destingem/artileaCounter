@@ -5,7 +5,9 @@ import Container from "./pages/container/Container";
 import Alert from "./reducers/message/Alert";
 import CompetitionDetails from "./pages/competition/CompetitionDetails";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
+import { Notifications } from '@mantine/notifications';
 const theme = createTheme({
   palette: {
     primary: {
@@ -27,11 +29,16 @@ function App() {
       <div data-style="title"></div>
       <Alert />
      <ThemeProvider theme={theme}>
+   
+      <ModalsProvider>
+      <Notifications />
      <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/app/*" element={<Container />} />
         <Route path="/competition/:id" element={<CompetitionDetails />} />
       </Routes>
+      </ModalsProvider>
+   
       </ThemeProvider>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation} from "react-router-dom";
 
 // pages and components
 import Links from "./Links";
@@ -7,6 +7,9 @@ import Links from "./Links";
 import style from "./style.module.scss";
 import Header from "./Header";
 import RoutesContainer from "./RoutesContainer";
+import Linky from "./Linky";
+import { useHotkeys } from "@mantine/hooks";
+import ShortCuts from "./ShortCuts";
 
 function Container() {
   const path = useLocation().pathname;
@@ -17,11 +20,12 @@ function Container() {
   }, [path]);
 
   if (pathname === "app") return <Navigate replace to="/app/" />;
-
+  
+ 
   return (
     <div className={style.index}>
-      <Links />
-
+      <Linky />
+      <ShortCuts />
       <div className={style.container}>
         <Header path={pathname} user={"user"} />
         <RoutesContainer />
