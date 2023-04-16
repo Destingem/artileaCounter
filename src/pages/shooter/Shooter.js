@@ -42,21 +42,30 @@ function Shooter() {
   };
   React.useEffect(() => {
     // filter data based on search input
+    console.log(shooters[0]);
     const filteredData = shooters.filter((item) =>
       item.lname.toLowerCase().includes(search.toLowerCase()) ||
-      item.fname.toLowerCase().includes(search.toLowerCase())
+      item.fname.toLowerCase().includes(search.toLowerCase()) ||
+      item.dateOfBirth.toLowerCase().includes(search.toLowerCase()) ||
+      item.email.toLowerCase().includes(search.toLowerCase()) ||
+      item.nationality.toLowerCase().includes(search.toLowerCase()) ||
+      item.phone.toLowerCase().includes(search.toLowerCase()) ||
+      item.Identificators.firearmLicence.toLowerCase().includes(search.toLowerCase()) ||
+      item.Identificators.refreeLincense.toLowerCase().includes(search.toLowerCase()) ||
+      item.Identificators.trainerLicense.toLowerCase().includes(search.toLowerCase())
     );
     setArray(filteredData);
   }, [search, shooters]);
   return (
     <div data-style="main" className={style.index}>
-      <AddShooter handleClose={handleClose} open={open} title={"ADD People"} />
+      <AddShooter handleClose={handleClose} open={open} title={"Přidat osobu"} />
       <div data-style="search">
         <TextField
-          sx={{ marginRight: "20px" }}
-          label="search place"
+          sx={{ marginRight: "20px", width: "30%" }}
+          label="Vyhledat osobu"
           variant="outlined"
           size="small"
+          
           value={search}
           onChange={handleSearchChange}
         />
@@ -67,7 +76,7 @@ function Shooter() {
           startIcon={<Icon icon="material-symbols:add-circle-outline" />}
           onClick={handleClose}
         >
-          add People
+          Přidat osobu
         </Button>
       </div>
       <ShooterTable

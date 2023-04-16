@@ -60,15 +60,15 @@ function EditShootingRange({ item, setItem, title }) {
         <p data-style="title">{title}</p>
 
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <TextField size="small" {...register("name")} label="name" />
+          <TextField size="small" {...register("name")} label="Název střelnice" />
           <TextField
             size="small"
             {...register("provozovatel")}
-            label="provozovatel"
+            label="Provozovatel"
           />
-          <TextField size="small" {...register("staff")} label="city" />
+          <TextField size="small" {...register("staff")} label="Město" />
           <Button size="medium" variant="contained" type="submit">
-            add
+            Upravit střelnici
           </Button>
         </form>
       </div>

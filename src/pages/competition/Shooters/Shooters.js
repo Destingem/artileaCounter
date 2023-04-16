@@ -1,14 +1,16 @@
 import { Icon } from "@iconify/react";
-import { Button, TextField } from "@mui/material";
+import { Button, Group } from "@mantine/core";
 import React from "react";
 import ShooterTable from "./ShooterTable";
 import style from "./style.module.scss";
-import AddShooter from "./AddShooter";
+//import AddShooter from "./AddShooter";
+import AddShooter from "../../shooter/AddShooter";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCompitition, setCompitition } from "../../../reducers/appSlice";
 import DeleteShooter from "./DeleteShooter";
+import AddExistingShooter from "./AddShooter";
 function Shooters({ id }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState({create: false, existing: false});
   const dispatch = useDispatch();
   const comp = useSelector(selectCompitition);
   const [array, setArray] = React.useState(
@@ -18,8 +20,10 @@ function Shooters({ id }) {
   );
   const [itemToDelete, setItemToDelete] = React.useState(null);
   const [itemToEdit, setItemToEdit] = React.useState(false);
-  const handleClose = () => {
-    setOpen((prev) => !prev);
+  const handleChange = (e) => {
+    if(e === "create") setOpen({create: !open.create, existing: false});
+    if(e === "existing") setOpen({create: false, existing: !open.existing});
+    
   };
 
   React.useEffect(() => {
@@ -42,20 +46,36 @@ function Shooters({ id }) {
     <div data-style="main" className={style.index}>
       <div data-style="search">
         <div data-style="add-section">
-          <AddShooter
-            handleClose={handleClose}
-            open={open}
+        <AddShooter  id={id} handleClose={()=> {handleChange("create")}} open={open.create} title={"ADD People"} />
+        
+          <AddExistingShooter
+            handleClose={()=> {handleChange("existing")}}
+            open={open.existing}
             title={"add shooter"}
             id={id}
           />
+          <Group>
           <Button
-            variant="contained"
-            size="small"
-            onClick={handleClose}
+          color="blue.8"
+            component="button"
+            variant="filled"
+            size="md"
+            onClick={()=> {handleChange("create")}}
             startIcon={<Icon icon="material-symbols:add-circle-outline" />}
           >
-            add shooter
+            Přidat nového střelce
           </Button>
+          <Button
+            variant="filled"
+            component="button"
+            color="cyan.6"
+            size="md"
+            onClick={()=> {handleChange("existing")}}
+            startIcon={<Icon icon="material-symbols:add-circle-outline" />}
+          >
+            Přidat existujícího střelce
+          </Button>
+          </Group>
         </div>
       </div>
       <ShooterTable

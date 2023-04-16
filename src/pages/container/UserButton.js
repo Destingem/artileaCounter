@@ -7,29 +7,34 @@ import {
     createStyles,
   } from '@mantine/core';
   import { IconChevronRight } from '@tabler/icons-react';
-  
+
+
   const useStyles = createStyles((theme) => ({
     user: {
       display: 'block',
       width: '100%',
       padding: theme.spacing.md,
+      backgroundColor: "#e6e6e6",
+      transition: 'background-color 150ms ease',
       color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
   
       '&:hover': {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+        backgroundColor: theme.colorScheme === 'dark' ? "#cccccc" : "#cccccc" ,
       },
     },
   }));
   
  
   
-  export default function UserButton({ image, name, email, icon, ...others }) {
+  export default function UserButton({image, name, email, icon, ...others }) {
+    
     const { classes } = useStyles();
-  
+  others = {...others,id: "",["aria-controls"]: "",className: classes.user,}
+ 
     return (
-      <UnstyledButton className={classes.user} {...others}>
-        <Group>
-          <Avatar src={image} radius="xl" />
+      <UnstyledButton className={classes.user} {...others} >
+        <Group noWrap>
+         
   
           <div style={{ flex: 1 }}>
             <Text size="sm" weight={500}>

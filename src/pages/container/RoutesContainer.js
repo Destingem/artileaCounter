@@ -9,6 +9,7 @@ import ShootingRange from "../shootingrange/ShootingRange";
 import Discipline from "../discipline/Discipline";
 import CompetitionDetails from "../competition/CompetitionDetails";
 import Settings from "../settings/Settings";
+import Customization from "../customization/Customization";
 
 function RoutesContainer() {
   return (
@@ -22,6 +23,7 @@ function RoutesContainer() {
       <Route path="/clubs" element={<Teams />} />
       <Route path="/results" element={<Reasult />} />
       <Route path="/settings" element={<Settings /> }/>
+      <Route path="/customization" element={<Customization />} />
     </Routes>
   );
 }

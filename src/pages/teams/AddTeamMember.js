@@ -72,7 +72,7 @@ function AddTeamMember({ title, item, setItem }) {
           onSubmit={handleSubmit(onSubmitHandler)}
         >
           <FormControl variant="filled" sx={{ m: 1, minWidth: 250 }}>
-            <InputLabel id="demo-simple-select-filled-label">Member</InputLabel>
+            <InputLabel id="demo-simple-select-filled-label">Nový člen</InputLabel>
             <Select
               labelId="demo-simple-select-filled-label"
               id="demo-simple-select-filled"
@@ -90,7 +90,7 @@ function AddTeamMember({ title, item, setItem }) {
             </Select>
           </FormControl>
           <Button size="medium" variant="contained" type="submit">
-            add
+            Přidat nového člena
           </Button>
         </form>
       </div>

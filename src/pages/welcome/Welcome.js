@@ -36,10 +36,12 @@ function Welcome() {
 
     // reset the form if error found
     if (!result.err) {
-      dispatch(setUser(result.result.name));
+      console.log(result);
+      dispatch(setUser({name: result.result.name, email: result.result.email}));
       const info = JSON.parse(
         await window.api.inventory.getInfo(result.result._id)
       );
+      console.log(info);
       if (!info.err) dispatch(setUser(info.result));
       return reset();
     }

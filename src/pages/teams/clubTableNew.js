@@ -96,16 +96,16 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>firstName</TableCell>
-                    <TableCell>lastName</TableCell>
-                    <TableCell align="right">dateOfBirth</TableCell>
-                    <TableCell align="right">nationality</TableCell>
-                    <TableCell align="right">phone</TableCell>
-                    <TableCell align="right">email</TableCell>
-                    <TableCell align="right">firearmLicence</TableCell>
-                    <TableCell align="right">refreeLincense</TableCell>
-                    <TableCell align="right">trainerLicense</TableCell>
-                    <TableCell align="right">Action</TableCell>
+                    <TableCell>Jméno</TableCell>
+                    <TableCell>Příjmení</TableCell>
+                    <TableCell align="right">Datum narození</TableCell>
+                    <TableCell align="right">Stát</TableCell>
+                    <TableCell align="right">Telefon</TableCell>
+                    <TableCell align="right">Email</TableCell>
+                    <TableCell align="right">Číslo zbrojního průkazu</TableCell>
+                    <TableCell align="right">Licence rozhodčího</TableCell>
+                    <TableCell align="right">Trenérská licence</TableCell>
+                    <TableCell align="right">Akce</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -193,7 +193,7 @@ export default function ClubsTable({
           gap: 1,
         }}
       >
-        <p>Clubs table</p>
+        <p>Přehled klubů</p>
         <Icon icon="pixelarticons:tournament" fontSize={26} />
       </Toolbar>
       <Table aria-label="collapsible table">
@@ -207,12 +207,12 @@ export default function ClubsTable({
             }}
           >
             <TableCell />
-            <TableCell>name</TableCell>
-            <TableCell align="right">nationality</TableCell>
-            <TableCell align="right">organization</TableCell>
-            <TableCell align="right">phone</TableCell>
-            <TableCell align="right">email</TableCell>
-            <TableCell align="right">actions</TableCell>
+            <TableCell>Název klubu</TableCell>
+            <TableCell align="right">Země</TableCell>
+            <TableCell align="right">Organizace</TableCell>
+            <TableCell align="right">Telefon</TableCell>
+            <TableCell align="right">Email</TableCell>
+            <TableCell align="right">Akce</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

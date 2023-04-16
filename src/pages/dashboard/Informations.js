@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Informations() {
   const [Comp, setComp] = React.useState("");
@@ -30,30 +31,31 @@ function Informations() {
 
   return (
     <div data-style="informations-div">
-      <div data-style="card">
-        <h3 style={{ color: "var(--purple-cl)" }}>compitions</h3>
+      <NavLink to={"/app/competition"} data-style="card">
+        <h3 style={{ color: "var(--purple-cl)" }}>Závody</h3>
         <div data-style="details">
           <Icon color="#612096" icon="pixelarticons:tournament" />
           <p>{Comp}</p>
         </div>
         <i style={{ backgroundColor: "#612096" }} />
-      </div>
-      <div data-style="card">
-        <h3 style={{ color: "var(--yellow-cl)" }}>shooters</h3>
+      </NavLink>
+      <NavLink to={"/app/peoples"} data-style="card">
+        <h3 style={{ color: "var(--yellow-cl)" }}>Lidé</h3>
         <div data-style="details">
           <Icon color="#f8c93d" icon="ph:users-three-fill" />
           <p>{Shooter}</p>
         </div>
         <i style={{ backgroundColor: "#f8c93d" }} />
-      </div>
-      <div data-style="card">
-        <h3 style={{ color: "var(--orange-cl)" }}>teams</h3>
+      </NavLink>
+      <NavLink  to={"/app/clubs"} data-style="card">
+        <h3 style={{ color: "var(--orange-cl)" }}>Kluby</h3>
         <div data-style="details">
           <Icon color="#ff5c35" icon="bi:microsoft-teams" />
           <p>{Club}</p>
         </div>
         <i style={{ backgroundColor: "#ff5c35" }} />
-      </div>
+      </NavLink>
+      
     </div>
   );
 }

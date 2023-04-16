@@ -1,4 +1,5 @@
 module.exports.channel = {
+  SEARCH: "search",
   LOGIN: "login",
   SIGNUP: "signup",
 
@@ -64,4 +65,5 @@ module.exports.channel = {
   ADD_COMPETITIONshootingSessions: 'add:compititionshootingSessions',
   DELETE_COMPETITIONshootingSessions: "DELETE:compititionshootingSessions",
   INFO_COMP: "INFO:COMP",
+  EDIT_RESULT: "EDIT:RESULT",
 };

@@ -96,11 +96,11 @@ function AddStuff({ title, item, setItem }) {
                 onChange={handleChanges}
                 aria-label="basic tabs example"
               >
-                <Tab label="Add Final" {...a11yProps(0)} />
-                <Tab label="Add onRegular Time" {...a11yProps(1)} />
-                <Tab label="add onElectronic Time" {...a11yProps(2)} />
-                <Tab label="add onMigratory Time" {...a11yProps(3)} />
-                <Tab label="add other Time" {...a11yProps(4)} />
+                <Tab label="Finále" {...a11yProps(0)} />
+                <Tab label="Na přetáčecí terč" {...a11yProps(1)} />
+                <Tab label="Na elektronický terč" {...a11yProps(2)} />
+                <Tab label="Na posuvný terč" {...a11yProps(3)} />
+                <Tab label="Na jiný terč" {...a11yProps(4)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -197,11 +197,11 @@ const ADDFINAL = ({ handleClose, item, setItem }) => {
   return (
     <>
       <Icon onClick={handleClose} data-style="exit" icon="mdi:cancel-box" />
-      <p data-style="title">final</p>
+      <p data-style="title">Finále</p>
 
       <form style={{ gridTemplateColumns: "1fr" }}>
         <div sx={{ display: "flex" }}>
-          <label style={{ width: "150px" }}>does Have Final:</label>
+          <label style={{ width: "150px" }}>Má finále?</label>
           <Box>
             <Switch
               checked={doesHaveFinal}
@@ -213,7 +213,7 @@ const ADDFINAL = ({ handleClose, item, setItem }) => {
         <TextField
           size="small"
           disabled={!doesHaveFinal}
-          label="name"
+          label="Název pro finále"
           value={name}
           onChange={(event) => setname(event.target.value)}
         />
@@ -221,12 +221,12 @@ const ADDFINAL = ({ handleClose, item, setItem }) => {
           size="small"
           type="number"
           disabled={!doesHaveFinal}
-          label="time"
+          label="Čas na finále"
           value={time}
           onChange={(event) => settime(event.target.value)}
         />
         <div sx={{ display: "flex" }}>
-          <label style={{ width: "150px" }}>is number Of Shots Limited:</label>
+          <label style={{ width: "150px" }}>Je omezen počet ran?</label>
           <Box>
             <Switch
               checked={isnumOfShotsLimited}
@@ -237,7 +237,7 @@ const ADDFINAL = ({ handleClose, item, setItem }) => {
         <TextField
           size="small"
           type="number"
-          label="numberOfShots"
+          label="Počet ran"
           value={numberOfShots}
           onChange={(event) => setNumberOfShots(event.target.value)}
         />
@@ -278,7 +278,7 @@ const OnRegular = ({ handleClose, item, setItem }) => {
   return (
     <>
       <Icon onClick={handleClose} data-style="exit" icon="mdi:cancel-box" />
-      <p data-style="title">On Regular</p>
+      <p data-style="title">Na přetáčecí terč</p>
 
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <TextField
@@ -287,7 +287,7 @@ const OnRegular = ({ handleClose, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="total"
+          label="Celkový čas"
         />
         <TextField
           size="small"
@@ -295,24 +295,24 @@ const OnRegular = ({ handleClose, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="forPreparation"
+          label="Čas na přípravu"
         />
 
         <TextField
           size="small"
-          label="forPractice"
+          label="Čas na nástřel"
           type="number"
           {...register("forPractice")}
         />
         <TextField
           size="small"
-          label="forCompetition"
+          label="Čas na závod"
           type="number"
           {...register("forCompetition")}
         />
 
         <Button size="medium" variant="contained" type="submit">
-          add
+          Přidat
         </Button>
       </form>
     </>
@@ -348,7 +348,7 @@ const OnElectronic = ({ handleClose, arrayPlaces, title, item, setItem }) => {
   return (
     <>
       <Icon onClick={handleClose} data-style="exit" icon="mdi:cancel-box" />
-      <p data-style="title">On Electronic</p>
+      <p data-style="title">Na elektronický terč</p>
 
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <TextField
@@ -357,7 +357,7 @@ const OnElectronic = ({ handleClose, arrayPlaces, title, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="total"
+          label="Celkový čas"
         />
         <TextField
           size="small"
@@ -365,18 +365,18 @@ const OnElectronic = ({ handleClose, arrayPlaces, title, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="forPreparation"
+          label="Čas na přípravu"
         />
 
         <TextField
           size="small"
-          label="forPractice"
+          label="Čas na nástřel"
           type="number"
           {...register("forPractice")}
         />
         <TextField
           size="small"
-          label="forCompetition"
+          label="Čas na závod"
           type="number"
           {...register("forCompetition")}
         />
@@ -417,7 +417,7 @@ const OnMigratory = ({ handleClose, arrayPlaces, title, item, setItem }) => {
   return (
     <>
       <Icon onClick={handleClose} data-style="exit" icon="mdi:cancel-box" />
-      <p data-style="title">On Migratory</p>
+      <p data-style="title">Na posuvný terč</p>
 
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <TextField
@@ -426,7 +426,7 @@ const OnMigratory = ({ handleClose, arrayPlaces, title, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="total"
+          label="Celkový čas"
         />
         <TextField
           size="small"
@@ -434,24 +434,24 @@ const OnMigratory = ({ handleClose, arrayPlaces, title, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="forPreparation"
+          label="Čas na přípravu"
         />
 
         <TextField
           size="small"
-          label="forPractice"
+          label="Čas na nástřel"
           type="number"
           {...register("forPractice")}
         />
         <TextField
           size="small"
-          label="forCompetition"
+          label="Čas na závod"
           type="number"
           {...register("forCompetition")}
         />
 
         <Button size="medium" variant="contained" type="submit">
-          add
+          Přidat
         </Button>
       </form>
     </>
@@ -486,7 +486,7 @@ const Onother = ({ handleClose, arrayPlaces, title, item, setItem }) => {
   return (
     <>
       <Icon onClick={handleClose} data-style="exit" icon="mdi:cancel-box" />
-      <p data-style="title">Other</p>
+      <p data-style="title">Na jiný terč</p>
 
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <TextField
@@ -495,7 +495,7 @@ const Onother = ({ handleClose, arrayPlaces, title, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="total"
+          label="Celkový čas"
         />
         <TextField
           size="small"
@@ -503,24 +503,24 @@ const Onother = ({ handleClose, arrayPlaces, title, item, setItem }) => {
             required: true,
           })}
           type="number"
-          label="forPreparation"
+          label="Čas na přípravu"
         />
 
         <TextField
           size="small"
-          label="forPractice"
+          label="Čas na nástřel"
           type="number"
           {...register("forPractice")}
         />
         <TextField
           size="small"
-          label="forCompetition"
+          label="Čas na závod"
           type="number"
           {...register("forCompetition")}
         />
 
         <Button size="medium" variant="contained" type="submit">
-          add
+          Přidat
         </Button>
       </form>
     </>

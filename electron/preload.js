@@ -1,5 +1,6 @@
-const { contextBridge, ipcRenderer } = require("electron");
+const { contextBridge, ipcRenderer, shell } = require("electron");
 const channel = {
+  SEARCH: "search",
   LOGIN: "login",
   SIGNUP: "signup",
 
@@ -67,6 +68,7 @@ const channel = {
   ADD_COMPETITIONshootingSessions: 'add:compititionshootingSessions',
   DELETE_COMPETITIONshootingSessions: "DELETE:compititionshootingSessions",
   INFO_COMP: "INFO:COMP",
+  EDIT_RESULT: "EDIT:RESULT",
 
 
 
@@ -80,7 +82,17 @@ const channel = {
 
 
 };
+contextBridge.exposeInMainWorld('electron', {
+  openExternal: (url) => {
+    shell.openExternal(url);
+  },
+});
 contextBridge.exposeInMainWorld("api", {
+  searching: {
+    search: function (data) {
+      return ipcRenderer.invoke(channel.SEARCH, data);
+    },
+  },
   screen: {
     size: function () {
       return ipcRenderer.invoke("screen");
@@ -261,6 +273,13 @@ contextBridge.exposeInMainWorld("api", {
     info: function (data){
       return ipcRenderer.invoke(channel.INFO_COMP, data);
     },
+    editResult: function (dat){
+      
+      if(dat && dat.competitionID && dat.shootingSessionID && dat.data){
+        const {competitionID, shootingSessionID, data} = dat;
+      return ipcRenderer.invoke(channel.EDIT_RESULT, {competitionID, shootingSessionID, data});
+      }
+    }
     // addshiftsshootingSessions: function (data) {
     //   return ipcRenderer.invoke(channel.ADD_COMPETITIONshootingSessions, data)
     // },
@@ -279,7 +298,7 @@ contextBridge.exposeInMainWorld("api", {
     // deleteshiftsdisciplines: function (data){
     //   return ipcRenderer.invoke(channel.DELETE_COMPETITIONdisciplinesITION, data);
     // },
-
+    
 
 
 

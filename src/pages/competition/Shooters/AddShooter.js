@@ -16,13 +16,13 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-function AddShooter({ open, handleClose, title, id }) {
+function AddExistingShooter({ open, handleClose, title, id }) {
   const { register, reset, handleSubmit, setValue } = useForm();
   const [shooterName, setShooterName] = React.useState();
   const dispatch = useDispatch();
   const shooters = useSelector(selectShooter);
   const [array, setArry] = React.useState(shooters);
-
+console.log(shooterName);
   // submit handler to get data from the form using useForm
   const onSubmitHandler = async (data) => {
     const result = JSON.parse(
@@ -93,4 +93,4 @@ function AddShooter({ open, handleClose, title, id }) {
   );
 }
 
-export default AddShooter;
+export default AddExistingShooter;

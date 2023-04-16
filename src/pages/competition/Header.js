@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectUser } from "../../reducers/appSlice";
 import { useNavigate } from "react-router-dom";
-
+import { AiFillHome } from "react-icons/ai";
 function Header({ path }) {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
@@ -20,13 +20,13 @@ function Header({ path }) {
         >
           <Icon icon="material-symbols:text-select-move-back-word-rounded" />
         </div>
-        <h3>{"Competition Details"}</h3>
+        <h3>{"Detaily závodu"}</h3>
       </div>
       <div>
-        <div data-style="user">
-          <span>{user}</span>
-          <Icon icon="mdi:user-circle" />
-        </div>
+        <Link to= "/app" data-style="user">
+          <span></span>
+          <AiFillHome />
+        </Link>
         <Link to="/" style={{ display: "flex" }}>
           <Icon icon="ph:sign-out-bold" />
         </Link>

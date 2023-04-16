@@ -39,13 +39,13 @@ function DeleteDiscipline({ item, setItem }) {
     >
       <Box className={style.delete}>
         <h3>{item?.name}</h3>
-        <p>do you really want to delete this item ?</p>
+        <p>Opravdu chcete odstranit disciplínu ?</p>
         <div>
           <Button variant="contained" onClick={cancel}>
-            no, cancel
+            Ne, zrušit
           </Button>
           <Button variant="contained" color="error" onClick={confirme}>
-            yes delete it
+            Ano, chci smazat disciplínu
           </Button>
         </div>
       </Box>

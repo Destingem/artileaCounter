@@ -24,7 +24,7 @@ export default function ShooterTable({ data, setItemToDelete, setItemToEdit }) {
           gap: 1,
         }}
       >
-        <p>shooters table</p>
+        <p>Přehled osob</p>
         <Icon icon="ph:users-three-fill" fontSize={26} />
       </Toolbar>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -37,16 +37,16 @@ export default function ShooterTable({ data, setItemToDelete, setItemToEdit }) {
               },
             }}
           >
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell align="right">date Of Birth</TableCell>
-            <TableCell align="right">Nationality</TableCell>
-            <TableCell align="right">Phone</TableCell>
+            <TableCell>Jméno</TableCell>
+            <TableCell>Příjmení</TableCell>
+            <TableCell align="right">Datum narození</TableCell>
+            <TableCell align="right">Země</TableCell>
+            <TableCell align="right">Telefon</TableCell>
             <TableCell align="right">Email</TableCell>
-            <TableCell align="right">firearmLicence</TableCell>
-            <TableCell align="right">refreeLincense</TableCell>
-            <TableCell align="right">trainerLicense</TableCell>
-            <TableCell align="right">actions</TableCell>
+            <TableCell align="right">Zbrojní průkaz</TableCell>
+            <TableCell align="right">Rozhodcovská licence</TableCell>
+            <TableCell align="right">Trenérská licence</TableCell>
+            <TableCell align="right">Akce</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

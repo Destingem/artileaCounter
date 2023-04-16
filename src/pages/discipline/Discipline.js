@@ -43,9 +43,11 @@ function Discipline() {
     setSearch(event.target.value);
   };
   React.useEffect(() => {
+    
     // filter data based on search input
     const filteredData = discipline.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase())
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.defedesion.toLowerCase().includes(search.toLowerCase())
     );
     setArray(filteredData);
   }, [search, discipline]);
@@ -54,13 +56,13 @@ function Discipline() {
       <AddDiscipline
         handleClose={handleClose}
         open={open}
-        title={"ADD Discipline"}
+        title={"Přidat disciplínu"}
       />
 
       <div data-style="search">
         <TextField
-          sx={{ marginRight: "20px" }}
-          label="search Discipline"
+          sx={{ marginRight: "20px", width: "30%" }}
+          label="Vyhledat disciplínu"
           variant="outlined"
           size="small"
           value={search}
@@ -73,7 +75,7 @@ function Discipline() {
           startIcon={<Icon icon="material-symbols:add-circle-outline" />}
           onClick={handleClose}
         >
-          add discipline
+          Přidat disciplínu
         </Button>
       </div>
       <DisciplineTable
@@ -92,7 +94,7 @@ function Discipline() {
       <EditDiscipline
         item={itemToEdit}
         setItem={setItemToEdit}
-        title={"Edit Discipline"}
+        title={"Upravit disciplínu"}
       />
       <DeleteOther item={memberToDelete} setItem={setMemberToDelete} />
     </div>

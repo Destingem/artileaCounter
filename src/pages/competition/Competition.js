@@ -52,7 +52,7 @@ function Competition() {
         <div data-style="add-section">
           <TextField
             sx={{ marginRight: "20px" }}
-            label="search compition"
+            label="Vyhledat závod"
             variant="outlined"
             size="small"
             value={search}
@@ -65,7 +65,7 @@ function Competition() {
             onClick={handleClose}
             startIcon={<Icon icon="material-symbols:add-circle-outline" />}
           >
-            add compition
+            Přidat závod
           </Button>
         </div>
       </div>

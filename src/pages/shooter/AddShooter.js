@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 import { nationalities } from "./nationalities";
 import style from "./style.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTeams, setShooter } from "../../reducers/appSlice";
+import { selectTeams, setShooter, setCompitition } from "../../reducers/appSlice";
 import { AddMessage } from "../../reducers/message/AddMessage";
 
-function AddShooter({ open, handleClose, title }) {
+function AddShooter({ open, handleClose, title, id }) {
   const { register, reset, handleSubmit, setValue } = useForm();
   const [selectedNationality, setSelectedNationality] = React.useState([]);
   const [search, setSearch] = React.useState("");
@@ -42,13 +42,28 @@ function AddShooter({ open, handleClose, title }) {
     };
     const result = JSON.parse(await window.api.people.add(datas));
     AddMessage(result, dispatch);
+    
     if (!result.err) {
       const results = JSON.parse(await window.api.people.get());
-      console.log(results);
       dispatch(setShooter(results.result));
       reset();
+  
+      if (id) {
+        console.log(result);
+        const addShooterToCompetitionResult = JSON.parse(
+          await window.api.compitition.addshooters({ data: result.result._id, _id: id })
+         
+        );
+        AddMessage(addShooterToCompetitionResult, dispatch);
+        if (!addShooterToCompetitionResult.err) {
+          
+          const competitionResults = JSON.parse(await window.api.compitition.get());
+          dispatch(setCompitition(competitionResults.result));
+        }
+      }
     }
   };
+
 
   // search handler
   const searchHandler = (e) => {

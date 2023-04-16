@@ -10,8 +10,12 @@ import { Navigate } from "react-router-dom";
 import { Kbd, Select } from "@mantine/core";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useHotkeys } from "@mantine/hooks";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { HiOutlineStatusOnline } from "react-icons/hi";
+import { TbTarget } from "react-icons/tb";
 import Search from "./Search";
-function Header({ path }) {
+import MenuOption from "./MenuOption";
+function Header({ path, redirect, setRedirection }) {
   const dispatch = useDispatch();
   
   const user = useSelector(selectUser);
@@ -21,20 +25,23 @@ function Header({ path }) {
     <div data-style="header">
       <h3>{path ? path : "dashboard"}</h3>
      
-     <Search />
+     <Search redirect={redirect} setRedirection={setRedirection} />
       
     
       <div style={{display: "flex"}}>
         <div data-style="user">
-          <span>{user}</span>
-          <Icon icon="mdi:user-circle" />
+         
+          
         </div>
-       
-        <Button onClick={()=>{
-          dispatch(resetUser())
-        }} style={{ display: "flex" }}>
-          <Icon icon="ph:sign-out-bold" />
+        <Button style={{ display: "flex" }}>
+          <TbTarget />
         </Button>
+       <Button>
+       <HiOutlineStatusOnline />
+       </Button>
+        <MenuOption style={{ display: "flex" }}>
+         <AiOutlineFundProjectionScreen />
+        </MenuOption>
       </div>
     </div>
   );

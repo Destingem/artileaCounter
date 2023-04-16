@@ -76,19 +76,19 @@ function EditTeam({ title, item, setItem }) {
         <p data-style="title">{title}</p>
 
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <TextField size="small" {...register("name")} label="name" />
-          <TextField size="small" {...register("address")} label="address" />
-          <TextField size="small" {...register("city")} label="city" />
+          <TextField size="small" {...register("name")} label="Název" />
+          <TextField size="small" {...register("address")} label="Adresa" />
+          <TextField size="small" {...register("city")} label="Město" />
           <TextField
             size="small"
             {...register("postalCode")}
-            label="postalCode"
+            label="PSČ"
           />
 
           <div data-style="select">
             <TextField
               size="small"
-              label="country"
+              label="Země"
               onChange={searchHandler}
               value={search}
               onFocus={() => setShow(true)}
@@ -114,23 +114,23 @@ function EditTeam({ title, item, setItem }) {
           <TextField
             size="small"
             {...register("country")}
-            label="selected country"
+            label="Vybraná země"
             InputLabelProps={{
               shrink: true,
             }}
             sx={{ pointerEvents: "none" }}
           />
 
-          <TextField size="small" {...register("phone")} label="phone" />
-          <TextField size="small" {...register("email")} label="email" />
-          <TextField size="small" {...register("web")} label="web" />
+          <TextField size="small" {...register("phone")} label="Telefon" />
+          <TextField size="small" {...register("email")} label="Email" />
+          <TextField size="small" {...register("web")} label="Webovky" />
           <TextField
             size="small"
             {...register("description")}
-            label="description"
+            label="Popis"
           />
           <Button size="medium" variant="contained" type="submit">
-            save
+            Uložit
           </Button>
         </form>
       </div>

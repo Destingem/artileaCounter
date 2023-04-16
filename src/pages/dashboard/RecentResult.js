@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Toolbar } from "@mui/material";
-import { Chip } from "@mantine/core";
+import { Badge, Chip } from "@mantine/core";
 import { Icon } from "@iconify/react";
 import { useNavigate, Navigate } from "react-router-dom";
 
@@ -50,7 +50,7 @@ export default function RecentResultTable({
         gap: 1,
       }}
     >
-      <p>Competition table</p>
+      <p>Přehled závodů</p>
       <Icon icon="pixelarticons:tournament" fontSize={26} />
     </Toolbar>
     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -63,12 +63,12 @@ export default function RecentResultTable({
             },
           }}
         >
-          <TableCell align="center">Compition Name</TableCell>
-          <TableCell align="center">Competition description</TableCell>
-          <TableCell align="center">Starting DAte</TableCell>
-          <TableCell align="center">Ending Date</TableCell>
+          <TableCell align="center">Název závodu</TableCell>
+          <TableCell align="center">Popis závodu</TableCell>
+          <TableCell align="center">Začátek</TableCell>
+          <TableCell align="center">Konec</TableCell>
           <TableCell align="center">Status </TableCell>
-          <TableCell align="center">View</TableCell>
+          <TableCell align="center">Zobrazit</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -86,7 +86,7 @@ export default function RecentResultTable({
             <TableCell align="center">{row.startDate}</TableCell>
             <TableCell align="center">{row.endDate}</TableCell>
             <TableCell align="center">
-              <Chip
+              <Badge
              
                 
                 color={
@@ -108,15 +108,15 @@ export default function RecentResultTable({
                     new Date(todayAsString).getTime() &&
                   new Date(todayAsString).getTime() <
                     new Date(row.endDate).getTime()
-                    ? "Ongoing"
+                    ? "Probíhá"
                     : new Date(todayAsString).getTime() >
                       new Date(row.endDate).getTime()
-                    ? "Ended"
+                    ? "Skončil"
                     : new Date(todayAsString).getTime() <
                       new Date(row.startDate).getTime()
-                    ? "Wating"
-                    : "Wating "
-                }</Chip>
+                    ? "Nezačal"
+                    : "Nezačal"
+                }</Badge>
             </TableCell>
             <TableCell align="center">
               <Chip

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 export default function ShiftTable({ array }) {
   const [unique, setUnique] = useState(null);
   const classes = useStyles();
-
+console.log(array);
   React.useEffect(() => {
     let shifts = [];
 
@@ -38,6 +38,7 @@ export default function ShiftTable({ array }) {
   return (
     <>
       <TableContainer component={Paper}>
+      {console.log(unique)}
         {unique?.map((el, index) => (
           <>
             <Toolbar
@@ -59,30 +60,32 @@ export default function ShiftTable({ array }) {
                 {"Shift " +
                   el.shiftNumber +
                   " " +
-                  el.shiftRefrees.start +
+                  el.start[0] +
                   " / " +
-                  el.shiftRefrees.end}
+                  el.end[0]}
               </p>
             </Toolbar>
             <Table className={classes.table} aria-label="custom table">
               <TableHead>
-                {el.shootingSessions.shooter.map((ell, index) => (
+                {el?.shootingSessions.map((element, index) => (
+                  
                   <TableCell key={index} align="center">
-                    {el.shootingSessions.place}
+                    {element.place}
                   </TableCell>
                 ))}
               </TableHead>
               <TableBody>
                 <TableRow>
-                  {el.shootingSessions.shooter.map((ell, index) => {
+                  {el?.shootingSessions.map((ell, index) => {
+                    console.log(ell);
                     return (
                       <>
                         <TableCell align="center">
                           <ul>
                             <li>
-                              <h4>{el.shootingSessions.discipline[0].name}</h4>
+                              <h4>{ell?.discipline?.name}</h4>
                             </li>
-                            <li> {ell.fname + " " + ell.lname}</li>
+                            <li> {ell?.shooter?.fname + " " + ell?.shooter?.lname}</li>
                           </ul>
                         </TableCell>
                       </>

@@ -47,8 +47,13 @@ function Teams() {
   };
   React.useEffect(() => {
     // filter data based on search input
+    console.log(teams[0]);
     const filteredData = teams.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase())
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.email.toLowerCase().includes(search.toLowerCase()) ||
+      item.nationality.toLowerCase().includes(search.toLowerCase()) ||
+      item.organization.toLowerCase().includes(search.toLowerCase()) ||
+      item.phone.toLowerCase().includes(search.toLowerCase())
     );
     setArray(filteredData);
   }, [search, teams]);
@@ -58,8 +63,8 @@ function Teams() {
 
       <div data-style="search">
         <TextField
-          sx={{ marginRight: "20px" }}
-          label="search club"
+          sx={{ marginRight: "20px", width: "30%"}}
+          label="Vyhledat klub"
           variant="outlined"
           id="search-input"
           size="small"
@@ -73,7 +78,7 @@ function Teams() {
           startIcon={<Icon icon="material-symbols:add-circle-outline" />}
           onClick={handleClose}
         >
-          add club
+          Přidat klub
         </Button>
       </div>
 
@@ -85,11 +90,11 @@ function Teams() {
         setMemberToDelete={setMemberToDelete}
       />
       <DeleteTeam item={itemToDelete} setItem={setItemToDelete} />
-      <EditTeam item={itemToEdit} setItem={setItemToEdit} title={"Edit club"} />
+      <EditTeam item={itemToEdit} setItem={setItemToEdit} title={"Upravit klub"} />
       <AddTeamMember
         item={itemToEditMember}
         setItem={setItemToEditMember}
-        title={"ADD member"}
+        title={"Přidat nového člena"}
       />
       <DeletememberFromtheTeam
         item={memberToDelete}

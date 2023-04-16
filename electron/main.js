@@ -1,4 +1,6 @@
+const documents = require('./index.js');
 // setup the electron app variable
+
 const { BrowserWindow, app, dialog } = require("electron");
 
 // the path is used to get the path of the prealod file
@@ -15,6 +17,49 @@ const disciplineDB = require("../DataBase/Functions/disciplinesFun");
 const competitionDB = require("../DataBase/Functions/competitionFun");
 const shootingrangeDB = require("../DataBase/Functions/shootingRangeFun");
 
+const FlexSearch = require('flexsearch');
+
+
+
+async function search(query) {
+  const searchIndex = new FlexSearch.Document({
+    document: {
+      id: 'id',
+      field: ['title', 'content'],
+    },
+    tokenize: 'strict',
+    async: true,
+    depth: 3,
+    threshold: -1,
+  });
+  
+  
+  documents.forEach((doc) => {
+ 
+    searchIndex.add(doc);
+  });
+  console.log(query);
+  const results = await searchIndex.searchAsync(query);
+  console.log("Documents:", documents);
+  console.log('Raw search results:', results);
+
+  const resultSet = new Set();
+  results.forEach(result => {
+    result.result.forEach(id => {
+      resultSet.add(id);
+    });
+  });
+
+  const foundDocuments = Array.from(resultSet).map(id => {
+    return documents.find(doc => doc.id === id);
+  });
+
+  return foundDocuments;
+}
+
+// Call the search function with a query
+
+
 // set win variable iterable to use it anywhere
 let win = null;
 
@@ -25,6 +70,11 @@ function createWindow() {
     width: 800,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
+      contextIsolation: true,
+      enableRemoteModule: true,
+      worldSafeExecuteJavaScript: true,
+    
     },
   });
 
@@ -104,7 +154,10 @@ ipcMain.handle(channel.INFO_CLUBS, async (e, args) => {
 ipcMain.handle(channel.INFO_COMP, async (e, args) => {
   return await competitionDB.getInformation();
 });
-
+ipcMain.handle(channel.EDIT_RESULT, async (e, args) => {
+console.log(args)
+  return await competitionDB.editResult(args.competitionID, args.shootingSessionID, args.data);
+});
 
 ipcMain.handle(channel.EDIT_PEOPLE, async (e, args) => {
 
@@ -171,7 +224,11 @@ ipcMain.handle(channel.DELETE_other, async (e, args) => {
   return await disciplineDB.deleteOther(args._id, args.team);
 });
 
-
+ipcMain.handle(channel.SEARCH, async (e, args)=> {
+  console.log(args)
+  let result = await search(args)
+  return JSON.stringify(result)
+})
 
 
 

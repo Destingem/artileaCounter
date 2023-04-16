@@ -64,7 +64,7 @@ function ShootingRange() {
       <AddShootingRange
         handleClose={handleClose}
         open={open}
-        title={"ADD SHOOTING RANGE"}
+        title={"Přidat střelnici"}
       />
 
       <div data-style="search">
@@ -83,7 +83,7 @@ function ShootingRange() {
           startIcon={<Icon icon="material-symbols:add-circle-outline" />}
           onClick={handleClose}
         >
-          add Shooting Range
+          Přidat střelnici
         </Button>
       </div>
       <ShootingRangeTableNew

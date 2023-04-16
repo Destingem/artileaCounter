@@ -6,11 +6,14 @@ const shiftRefrees = new mongoose.Schema({
   start: String,
   end: String,
 });
+
+
 const shootingSessions = new mongoose.Schema({
   shooter: mongoose.Types.ObjectId,
   discipline: mongoose.Types.ObjectId,
   notes: String,
   place: Number,
+  results: [Number],
 });
 const shifts = new mongoose.Schema({
   shiftNumber: Number,

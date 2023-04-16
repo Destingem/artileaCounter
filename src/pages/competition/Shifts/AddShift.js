@@ -24,8 +24,10 @@ import StepButton from "@mui/material/StepButton";
 import Typography from "@mui/material/Typography";
 import StepLabel from "@mui/material/StepLabel";
 import { height } from "@mui/system";
-
-const steps = ["ADD Shooting Sessions", "Add Shift Refrees", "Add Disciplines"];
+import AddShiftStep1 from "./Step1";
+import AddShiftStep2 from "./Step2";
+import AddShiftStep3 from "./Step3";
+const steps = ["Přidání shooting session", "Informace o směně", "Add Disciplines"];
 
 function AddShift({ open, handleClose, id, array }) {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -34,7 +36,8 @@ function AddShift({ open, handleClose, id, array }) {
   const [refrees, setRefress] = React.useState([]);
   const [shiftRef, setShiftRef] = React.useState();
   const [desc, setdesc] = React.useState([]);
-  const [number, setnumber] = React.useState([]);
+  const [number, setnumber] = React.useState(array[0].shifts.length);
+ console.log(ShootingSaison);
   const dispatch = useDispatch();
 
   const totalSteps = () => {
@@ -79,7 +82,7 @@ function AddShift({ open, handleClose, id, array }) {
 
   const handleReset = async () => {
     let data = {
-      shiftNumber: number + 1,
+      shiftNumber: number,
       shootingSessions: ShootingSaison,
       shiftRefrees: {
         refrees: refrees,
@@ -102,6 +105,7 @@ function AddShift({ open, handleClose, id, array }) {
     setActiveStep(0);
     setCompleted({});
   };
+ console.log(array)
 
   return (
     <Modal
@@ -158,6 +162,7 @@ function AddShift({ open, handleClose, id, array }) {
                       desc={desc}
                       setdesc={setdesc}
                       setnumber={setnumber}
+                      number={number}
                     />
                   }
                 </Typography>
@@ -168,11 +173,11 @@ function AddShift({ open, handleClose, id, array }) {
                     onClick={handleBack}
                     sx={{ mr: 1 }}
                   >
-                    Back
+                    Zpět
                   </Button>
                   <Box sx={{ flex: "1 1 auto" }} />
                   <Button onClick={handleNext} sx={{ mr: 1 }}>
-                    Next
+                    Pokračovat
                   </Button>
                   {activeStep !== steps.length &&
                     (completed[activeStep] ? (
@@ -185,8 +190,8 @@ function AddShift({ open, handleClose, id, array }) {
                     ) : (
                       <Button onClick={handleComplete}>
                         {completedSteps() === totalSteps() - 1
-                          ? "Finish"
-                          : "Complete Step"}
+                          ? "Vytvořit"
+                          : "Dokončit"}
                       </Button>
                     ))}
                 </Box>
@@ -199,423 +204,11 @@ function AddShift({ open, handleClose, id, array }) {
   );
 }
 
-const AddShiftStep1 = ({
-  array,
-  ShootingSaison,
-  setShootingSaison,
-  setnumber,
-}) => {
-  const dispatch = useDispatch();
-  const { register, reset, handleSubmit, setValue } = useForm();
-  const [shooterName, setShooterName] = React.useState();
-  const [DesplineName, setDesplineName] = React.useState();
-  const [numbr, setnumbr] = React.useState();
-  const shooter = useSelector(selectShooter);
-  const onSubmitHandler = async (data) => {
-    console.log(shooterName);
-    if (shooterName && DesplineName) {
-      let datas = {
-        shooter: shooterName,
-        discipline: DesplineName,
-        notes: document.getElementById("notes").value
-          ? document.getElementById("notes").value
-          : "",
-        place: document.getElementById("place").value
-          ? document.getElementById("place").value
-          : "",
-      };
-      console.log(datas);
-      setShootingSaison((prev) => [...prev, datas]);
-    }
-  };
-  const handleChange = (event) => {
-    setShooterName(event.target.value);
-  };
 
-  const handleChange1 = (event) => {
-    setDesplineName(event.target.value);
-  };
-  useEffect(() => {
-    array.map((row) => {
-      setnumbr(row.shifts.length);
-      setnumber(row.shifts.length);
-    });
-  });
-  React.useEffect(() => {
-    const getData = async () => {
-      const result = JSON.parse(await window.api.people.get());
-      dispatch(setShooterName(result.result));
-    };
-    getData();
-  }, [dispatch]);
 
-  return (
-    <div>
-      <div>Shift Number : {numbr + 1}</div>
-      <form>
-        <FormControl sx={{ m: 1, Width: "150px" }} size="small">
-          <InputLabel id="demo-simple-select-helper-label">Shooter</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={shooterName}
-            label="Shooter"
-            onChange={handleChange}
-            size="small"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {array.map((row) => {
-              return row.shooters.map((el) => (
-                <MenuItem value={el._id}>{el.fname + " " + el.lname}</MenuItem>
-              ));
-            })}
-          </Select>
-        </FormControl>
 
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-helper-label">
-            Discipline
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={DesplineName}
-            label="Discipline"
-            size="small"
-            onChange={handleChange1}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {array.map((row) => {
-              return row.disciplines.map((el) => (
-                <MenuItem value={el?._id}>{el?.name}</MenuItem>
-              ));
-            })}
-          </Select>
-        </FormControl>
-        <TextField size="small" id="place" label="Place" type="number" />
-        <TextField size="small" id="notes" label="Note" />
 
-        <Button size="medium" variant="contained" onClick={onSubmitHandler}>
-          add
-        </Button>
-      </form>
 
-      <div
-        style={{
-          height: "100px",
-          overflow: "auto",
-          marginTop: 20,
-          marginLeft: "70px",
-        }}
-      >
-        <ul>
-          {ShootingSaison?.map((el, index) => {
-            let m = shooter.filter((els) => {
-              console.log(el.shooter);
-              return els._id === el.shooter;
-            });
-            let tab = m[0];
-
-            return (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  width: "300px",
-                  justifyContent: "space-between",
-                }}
-              >
-                {tab?.fname ? tab.fname : "ShootingSaison : " + index}
-
-                <Icon
-                  color="#ff5c35"
-                  icon="mdi:delete-circle"
-                  onClick={() => {
-                    setShootingSaison(
-                      ShootingSaison.filter(
-                        (item) => item !== ShootingSaison[index]
-                      )
-                    );
-                  }}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const AddShiftStep2 = ({
-  array,
-  shiftRef,
-  setShiftRef,
-  refrees,
-  setRefress,
-}) => {
-  const dispatch = useDispatch();
-  const [active, setactive] = useState(false);
-  const { register, reset, handleSubmit, setValue } = useForm();
-  const [refree, setrefrees] = React.useState();
-  const [shootingRanges, setshootingRanges] = React.useState();
-  const [numbr, setnumbr] = React.useState();
-  const shooter = useSelector(selectShooter);
-  const onSubmitHandler = async (data) => {
-    let datas = {
-      shootingRange: shootingRanges,
-      start: document.getElementById("start").value
-        ? document.getElementById("start").value
-        : "",
-      end: document.getElementById("end").value
-        ? document.getElementById("end").value
-        : "",
-    };
-    setShiftRef(datas);
-    setactive(!active);
-  };
-  let onSubmitHandlerRef = async (data) => {
-    if (refree) {
-      setRefress((prev) => [...prev, refree]);
-    }
-  };
-
-  const handleChange = (event) => {
-    setrefrees(event.target.value);
-  };
-
-  const handleChange1 = (event) => {
-    setshootingRanges(event.target.value);
-  };
-  useEffect(() => {
-    array.map((row) => {
-      setnumbr(row.shifts.length);
-    });
-  });
-  React.useEffect(() => {
-    const getData = async () => {
-      const result = JSON.parse(await window.api.people.get());
-      dispatch(setShooter(result.result));
-    };
-    getData();
-  }, [dispatch]);
-
-  return (
-    <div>
-      <div>Shift Number : {numbr + 1}</div>
-      <form>
-        <TextField size="small" type="date" id="start" disabled={active} />
-        <TextField size="small" type="date" id="end" disabled={active} />
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-helper-label">
-            shootingRanges
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={shootingRanges}
-            label="shootingRanges"
-            size="small"
-            onChange={handleChange1}
-            disabled={active}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {array.map((row) => {
-              return row.shootingRanges.map((el) => (
-                <MenuItem value={el._id}>{el.name}</MenuItem>
-              ));
-            })}
-          </Select>
-        </FormControl>
-
-        <Button variant="contained" size="small" onClick={onSubmitHandler}>
-          save
-        </Button>
-
-        <FormControl sx={{ m: 1 }} size="small">
-          <InputLabel id="demo-simple-select-helper-label">Refrees</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={refree}
-            label="Refrees"
-            onChange={handleChange}
-            size="small"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {array.map((row) => {
-              return row.staff.refrees.map((el) => (
-                <MenuItem value={el._id}>{el.fname + " " + el.lname}</MenuItem>
-              ));
-            })}
-          </Select>
-        </FormControl>
-        <Button onClick={onSubmitHandlerRef} size="small">
-          save Refree
-        </Button>
-      </form>
-
-      <div
-        style={{
-          height: "100px",
-          overflow: "auto",
-          marginTop: 20,
-          marginLeft: "70px",
-        }}
-      >
-        <ul>
-          {refrees?.map((el, index) => {
-            let m = shooter.filter((els) => {
-              console.log(el.shooter);
-              return els._id === el;
-            });
-            let tab = m[0];
-
-            return (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  width: "300px",
-                  justifyContent: "space-between",
-                }}
-              >
-                {tab?.fname}
-
-                <Icon
-                  color="#ff5c35"
-                  icon="mdi:delete-circle"
-                  onClick={() => {
-                    setRefress([
-                      ...refrees.slice(0, index),
-                      ...refrees.slice(index + 1),
-                    ]);
-                  }}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const AddShiftStep3 = ({ array, desc, setdesc }) => {
-  const [sates, setStates] = useState();
-  const dispatch = useDispatch();
-  const [discipline, setdisciplines] = React.useState();
-  const [shootingRanges, setshootingRanges] = React.useState();
-  const [numbr, setnumbr] = React.useState();
-  const shooter = useSelector(selectDiscipline);
-
-  let onSubmitHandlerRef = async (data) => {
-    if (discipline) {
-      setdesc((prev) => [...prev, discipline]);
-    }
-  };
-
-  const handleChange = (event) => {
-    setdisciplines(event.target.value);
-  };
-
-  useEffect(() => {
-    array.map((row) => {
-      setnumbr(row.shifts.length);
-    });
-  });
-  React.useEffect(() => {
-    const getData = async () => {
-      const result = JSON.parse(await window.api.discipline.get());
-      dispatch(setDiscipline(result.result));
-    };
-    getData();
-  }, [dispatch]);
-
-  return (
-    <div>
-      <div>Shift Number : {numbr + 1}</div>
-      <form>
-        <FormControl sx={{ m: 1 }} size="small">
-          <InputLabel id="demo-simple-select-helper-label">
-            desciplines
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={discipline}
-            label="disciplines"
-            onChange={handleChange}
-            size="small"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {array.map((row) => {
-              return row.disciplines.map((el) => (
-                <MenuItem value={el._id}>{el.name}</MenuItem>
-              ));
-            })}
-          </Select>
-        </FormControl>
-        <Button size="medium" onClick={onSubmitHandlerRef}>
-          save discipline
-        </Button>
-      </form>
-
-      <div
-        style={{
-          height: "100px",
-          overflow: "auto",
-          marginTop: 20,
-          marginLeft: "70px",
-        }}
-      >
-        <ul>
-          {desc?.map((el, index) => {
-            let m = shooter.filter((els) => {
-              console.log(el.shooter);
-              return els._id === el;
-            });
-            let tab = m[0];
-
-            return (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  width: "300px",
-                  justifyContent: "space-between",
-                }}
-              >
-                {tab?.name}
-
-                <Icon
-                  color="#ff5c35"
-                  icon="mdi:delete-circle"
-                  onClick={() => {
-                    setdesc([
-                      ...desc.slice(0, index),
-                      ...desc.slice(index + 1),
-                    ]);
-                  }}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  );
-};
 
 function Steps({
   index,
@@ -629,6 +222,7 @@ function Steps({
   desc,
   setdesc,
   setnumber,
+  number,
 }) {
   return (
     <Box
@@ -643,6 +237,7 @@ function Steps({
           ShootingSaison={ShootingSaison}
           setShootingSaison={setShootingSaison}
           setnumber={setnumber}
+          number={number}
         />
       ) : index === 1 ? (
         <AddShiftStep2
@@ -651,9 +246,10 @@ function Steps({
           setShiftRef={setShiftRef}
           refrees={refrees}
           setRefress={setRefress}
+          number={number}
         />
       ) : (
-        <AddShiftStep3 array={array} desc={desc} setdesc={setdesc} />
+        <AddShiftStep3 array={array} desc={desc} setdesc={setdesc} number={number} />
       )}
     </Box>
   );

@@ -10,8 +10,9 @@ import Paper from "@mui/material/Paper";
 import { Toolbar } from "@mui/material";
 import { Icon } from "@iconify/react";
 //import Chip from "@mui/material/Chip";
-import {Chip} from "@mantine/core";
+import {Badge, Chip} from "@mantine/core";
 import { useNavigate, Navigate } from "react-router-dom";
+import {BiShow} from "react-icons/bi";
 
 const today = new Date();
 const todayAsString = today.toLocaleDateString("default", {
@@ -41,7 +42,7 @@ export default function CompetitionTable({
           gap: 1,
         }}
       >
-        <p>Competition table</p>
+        <p>Přehled závodů</p>
         <Icon icon="pixelarticons:tournament" fontSize={26} />
       </Toolbar>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -54,13 +55,13 @@ export default function CompetitionTable({
               },
             }}
           >
-            <TableCell align="center">Compition Name</TableCell>
-            <TableCell align="center">Competition description</TableCell>
-            <TableCell align="center">Starting DAte</TableCell>
-            <TableCell align="center">Ending Date</TableCell>
-            <TableCell align="center">Status </TableCell>
-            <TableCell align="center">View</TableCell>
-            <TableCell align="center">Actions</TableCell>
+            <TableCell align="center">Název závodů</TableCell>
+            <TableCell align="center">Popis závodu</TableCell>
+            <TableCell align="center">Datum startu</TableCell>
+            <TableCell align="center">Konec závodu</TableCell>
+            <TableCell align="center">Stav</TableCell>
+            <TableCell align="center">Zobrazit</TableCell>
+            <TableCell align="center">Akce</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -78,37 +79,37 @@ export default function CompetitionTable({
               <TableCell align="center">{row.startDate}</TableCell>
               <TableCell align="center">{row.endDate}</TableCell>
               <TableCell align="center">
-                <Chip
+                <Badge
                 contrastText="white"
-                  label={
-                    new Date(row.startDate).getTime() <=
-                      new Date(todayAsString).getTime() &&
-                    new Date(todayAsString).getTime() <
+                  
+                color={
+                  new Date(row.startDate).getTime() <=
+                    new Date(todayAsString).getTime() &&
+                  new Date(todayAsString).getTime() <
+                    new Date(row.endDate).getTime()
+                    ? "green"
+                    : new Date(todayAsString).getTime() >
                       new Date(row.endDate).getTime()
-                      ? "Ongoing"
-                      : new Date(todayAsString).getTime() >
-                        new Date(row.endDate).getTime()
-                      ? "Ended"
-                      : new Date(todayAsString).getTime() <
-                        new Date(row.startDate).getTime()
-                      ? "Wating"
-                      : "Wating "
-                  }
-                  color={
-                    new Date(row.startDate).getTime() <=
-                      new Date(todayAsString).getTime() &&
-                    new Date(todayAsString).getTime() <
+                    ? "red"
+                    : new Date(todayAsString).getTime() <
+                      new Date(row.startDate).getTime()
+                    ? "yellow"
+                    : " yellow"
+                }
+                >{
+                  new Date(row.startDate).getTime() <=
+                    new Date(todayAsString).getTime() &&
+                  new Date(todayAsString).getTime() <
+                    new Date(row.endDate).getTime()
+                    ? "Probíhá"
+                    : new Date(todayAsString).getTime() >
                       new Date(row.endDate).getTime()
-                      ? "success"
-                      : new Date(todayAsString).getTime() >
-                        new Date(row.endDate).getTime()
-                      ? "error"
-                      : new Date(todayAsString).getTime() <
-                        new Date(row.startDate).getTime()
-                      ? "warning"
-                      : " warning"
-                  }
-                />
+                    ? "Skončil"
+                    : new Date(todayAsString).getTime() <
+                      new Date(row.startDate).getTime()
+                    ? "Nezačal"
+                    : "Nezačal"
+                }</Badge>
               </TableCell>
               <TableCell align="center">
                 <Chip
@@ -118,7 +119,7 @@ export default function CompetitionTable({
                   onClick={() => {
                     setRedirection("/competition/" + row._id);
                   }}
-                />
+                ><BiShow /></Chip>
               </TableCell>
               <TableCell
                 align="right"

@@ -70,38 +70,38 @@ function CompetitionDetails() {
             aria-label="basic tabs example"
           >
             <Tab
-              label="Over View"
+              label="Přehled"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(0)}
             />
             <Tab
-              label="Shooters"
+              label="Střelci"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(1)}
             />
 
             <Tab
-              label="Shooting Ranges"
+              label="Střelnice"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(2)}
             />
             <Tab
-              label="Staff"
+              label="Organizátoři"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(3)}
             />
             <Tab
-              label="Desciplines"
+              label="Disciplíny"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(4)}
             />
             <Tab
-              label="Shifts"
+              label="Směny"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(5)}
             />
             <Tab
-              label="Results"
+              label="Výsledky"
               sx={{ color: "white", fontWeight: 600 }}
               {...a11yProps(6)}
             />

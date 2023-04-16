@@ -61,7 +61,7 @@ function OverView({ id }) {
                   justifyContent: "space-between",
                 }}
               >
-                <h4>Competition name: </h4>
+                <h4>Název závodu: </h4>
                 <p> {" " + array[0]?.name}</p>
               </div>
               <div
@@ -71,7 +71,7 @@ function OverView({ id }) {
                   justifyContent: "space-between",
                 }}
               >
-                <h4>Competition description: </h4>
+                <h4>Popiš soutěže: </h4>
                 <p> {" " + array[0]?.description}</p>
               </div>
             </div>

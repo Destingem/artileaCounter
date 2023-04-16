@@ -74,8 +74,9 @@ console.log(label);
     </NavLink>
   ));
 
+ if(link && !hasLinks){
   return (
-    <NavLink to={link ? link : ""}>
+    <NavLink to={link}>
       <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
         <Group position="apart" spacing={0}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -99,6 +100,33 @@ console.log(label);
       {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
     </NavLink>
   );
+ } else{
+  return(
+    <>
+      <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
+        <Group position="apart" spacing={0}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <ThemeIcon variant="light" size={30}>
+              <Icon size="1.1rem" />
+            </ThemeIcon>
+            <Box ml="md">{label}</Box>
+          </Box>
+          {hasLinks && (
+            <ChevronIcon
+              className={classes.chevron}
+              size="1rem"
+              stroke={1.5}
+              style={{
+                transform: opened ? `rotate(${theme.dir === 'rtl' ? -90 : 90}deg)` : 'none',
+              }}
+            />
+          )}
+        </Group>
+      </UnstyledButton>
+      {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
+    </>
+  )
+ }
 }
 
 

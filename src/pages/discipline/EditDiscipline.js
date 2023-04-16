@@ -101,17 +101,17 @@ function EditDiscipline({ title, item, setItem }) {
             {...register("name", {
               required: true,
             })}
-            label="name"
+            label="Název disciplíny"
           />
           <TextField
             size="small"
             {...register("defedesion", {
               required: true,
             })}
-            label="defedesion"
+            label="Organizace"
           />
 
-          <p data-style="separator">Shots :</p>
+          <p data-style="separator">Počet ran :</p>
 
           <TextField
             size="small"
@@ -119,11 +119,11 @@ function EditDiscipline({ title, item, setItem }) {
               required: true,
             })}
             type="number"
-            label="competitionShots"
+            label="Počet závodních ran"
           />
           <div></div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <label style={{ width: "150px" }}>is Limited Preparation:</label>
+            <label style={{ width: "150px" }}>Je omezen počet nástřelných ran?</label>
             <Box>
               <Switch
                 checked={checkedLimitShots}
@@ -136,7 +136,7 @@ function EditDiscipline({ title, item, setItem }) {
             {...register("preparationLimit")}
             type="number"
             disabled={!checkedLimitShots}
-            label="preparation Limit"
+            label="Počet nástřelných ran"
           />
           <TextField
             size="small"
@@ -144,7 +144,7 @@ function EditDiscipline({ title, item, setItem }) {
             {...register("maxShot", {
               required: true,
             })}
-            label="max Shots"
+            label="Nejvyšší možná rána"
           />
           <TextField
             size="small"
@@ -152,13 +152,13 @@ function EditDiscipline({ title, item, setItem }) {
               required: true,
             })}
             type="number"
-            label="min Shots"
+            label="Nejnižší možná rána"
           />
 
-          <p data-style="separator">guns :</p>
+          <p data-style="separator">Zbraně</p>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            <label style={{ width: "150px" }}>pistol :</label>
+            <label style={{ width: "150px" }}>Pistole </label>
             <Box>
               <Switch
                 checked={pistol}
@@ -167,7 +167,7 @@ function EditDiscipline({ title, item, setItem }) {
             </Box>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <label style={{ width: "150px" }}>rifle :</label>
+            <label style={{ width: "150px" }}>Puška</label>
             <Box>
               <Switch
                 checked={rifle}
@@ -176,7 +176,7 @@ function EditDiscipline({ title, item, setItem }) {
             </Box>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <label style={{ width: "150px" }}>crossbow :</label>
+            <label style={{ width: "150px" }}>Kuše</label>
             <Box>
               <Switch
                 checked={crossbow}
@@ -187,11 +187,11 @@ function EditDiscipline({ title, item, setItem }) {
           <TextField
             size="small"
             {...register("gunsOther")}
-            label="gunsOther"
+            label="Jiné zbraně"
           />
 
           <Button size="medium" variant="contained" type="submit">
-            add
+            Upravit
           </Button>
         </form>
       </div>

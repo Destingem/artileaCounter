@@ -100,16 +100,16 @@ function Row({
                     textAlign: "center",
                   }}
                 >
-                  Final
+                  Finále
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="center">Have Final ?</TableCell>
-                      <TableCell align="center">name</TableCell>
-                      <TableCell align="center">time</TableCell>
-                      <TableCell align="center">isnumOfShotsLimited</TableCell>
-                      <TableCell align="center">numberOfShots</TableCell>
+                      <TableCell align="center">Má finále?</TableCell>
+                      <TableCell align="center">Název finále</TableCell>
+                      <TableCell align="center">Čas</TableCell>
+                      <TableCell align="center">Je omezen počet ran?</TableCell>
+                      <TableCell align="center">Počet ran</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -166,15 +166,15 @@ function Row({
                   textAlign: "center",
                 }}
               >
-                Guns
+                Zbraně
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Pistol</TableCell>
-                    <TableCell align="center">Rifle</TableCell>
-                    <TableCell align="center">Crossbow</TableCell>
-                    <TableCell align="center">Other</TableCell>
+                    <TableCell align="center">Pistolová disciplína</TableCell>
+                    <TableCell align="center">Pušková disciplína</TableCell>
+                    <TableCell align="center">Kušová disciplína</TableCell>
+                    <TableCell align="center">Disciplína pro jinou zbraň</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -217,11 +217,11 @@ function Row({
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">competitionShots</TableCell>
-                    <TableCell align="center">isLimitedPreparation</TableCell>
-                    <TableCell align="center">preparationLimit</TableCell>
-                    <TableCell align="center">maxShot</TableCell>
-                    <TableCell align="center">minShot</TableCell>
+                    <TableCell align="center">Počet ran v závodu</TableCell>
+                    <TableCell align="center">Je omezen nástřel?</TableCell>
+                    <TableCell align="center">Maximální počet ran v nástřelu</TableCell>
+                    <TableCell align="center">Nejvyšší možný zásah</TableCell>
+                    <TableCell align="center">Nejnižší možný zásah</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -249,7 +249,7 @@ function Row({
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h4" gutterBottom component="div">
-                TIME
+                Časové limity
               </Typography>
               <Typography
                 variant="h6"
@@ -262,15 +262,15 @@ function Row({
                   textAlign: "center",
                 }}
               >
-                onRegular
+                Na přetáčecí terč
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">total</TableCell>
-                    <TableCell align="center">forPreparation</TableCell>
-                    <TableCell align="center">forPractice</TableCell>
-                    <TableCell align="center">forCompetition</TableCell>
+                    <TableCell align="center">Celkem</TableCell>
+                    <TableCell align="center">pro přípravu</TableCell>
+                    <TableCell align="center">pro nástřel</TableCell>
+                    <TableCell align="center">pro závod</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -313,15 +313,15 @@ function Row({
                   textAlign: "center",
                 }}
               >
-                onElectronic
+                Na elektronický terč
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
-                    <TableCell align="center">total</TableCell>
-                    <TableCell align="center">forPreparation</TableCell>
-                    <TableCell align="center">forPractice</TableCell>
-                    <TableCell align="center">forCompetition</TableCell>
+                <TableRow>
+                    <TableCell align="center">Celkem</TableCell>
+                    <TableCell align="center">pro přípravu</TableCell>
+                    <TableCell align="center">pro nástřel</TableCell>
+                    <TableCell align="center">pro závod</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -364,15 +364,15 @@ function Row({
                   textAlign: "center",
                 }}
               >
-                onMigratory
+                Na posuvný terč
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
-                    <TableCell align="center">total</TableCell>
-                    <TableCell align="center">forPreparation</TableCell>
-                    <TableCell align="center">forPractice</TableCell>
-                    <TableCell align="center">forCompetition</TableCell>
+                <TableRow>
+                    <TableCell align="center">Celkem</TableCell>
+                    <TableCell align="center">pro přípravu</TableCell>
+                    <TableCell align="center">pro nástřel</TableCell>
+                    <TableCell align="center">pro závod</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -415,16 +415,15 @@ function Row({
                   textAlign: "center",
                 }}
               >
-                other
+                Jiný způsob
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
-                    <TableCell align="center">total</TableCell>
-                    <TableCell align="center">forPreparation</TableCell>
-                    <TableCell align="center">forPractice</TableCell>
-                    <TableCell align="center">forCompetition</TableCell>
-                    <TableCell align="right">Action</TableCell>
+                <TableRow>
+                    <TableCell align="center">Celkem</TableCell>
+                    <TableCell align="center">pro přípravu</TableCell>
+                    <TableCell align="center">pro nástřel</TableCell>
+                    <TableCell align="center">pro závod</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -499,7 +498,7 @@ export default function DisciplineTable({
           gap: 1,
         }}
       >
-        <p>Discipline table</p>
+        <p>Přehled disciplín</p>
         <Icon icon="material-symbols:text-snippet-rounded" fontSize={26} />
       </Toolbar>
       <Table aria-label="collapsible table">
@@ -513,9 +512,9 @@ export default function DisciplineTable({
             }}
           >
             <TableCell />
-            <TableCell>name</TableCell>
-            <TableCell>defedesion</TableCell>
-            <TableCell align="right">actions</TableCell>
+            <TableCell>Název disciplíny</TableCell>
+            <TableCell>Organizace</TableCell>
+            <TableCell align="right">Akce</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -26,7 +26,7 @@ module.exports.addcompetition = async (data) => {
     );
   }
 };
-
+// Compeitition 1
 module.exports.getcompetitions = async () => {
   try {
     const competitions = await competitionModel.aggregate([
@@ -150,16 +150,56 @@ module.exports.getcompetitions = async () => {
           preserveNullAndEmptyArrays: true,
         },
       },
+     
+      {
+        $lookup: {
+          from: "peoples",
+          localField: "shifts.shootingSessions.shooter",
+          foreignField: "_id",
+          as: "matchedShooter",
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "matchedShooter.userId",
+          foreignField: "_id",
+          as: "matchedUser",
+        },
+      },
+
+      {
+        $lookup: {
+          from: "disciplines",
+          localField: "shifts.shootingSessions.discipline",
+          foreignField: "_id",
+          as: "matchedDiscipline",
+        },
+      },
+      {
+        $lookup: {
+          from: "disciplines",
+          localField: "shifts.shootingSessions.discipline",
+          foreignField: "_id",
+          as: "matchedDiscipline",
+        },
+      },
+      
       {
         $addFields: {
           shootingRangesObject: {
-            shooter: "$shifts_shootingSessions_shooter",
-            discipline: "$shifts_shootingSessions_discipline",
+            shooter: { $arrayElemAt: ["$matchedShooter", 0] },
+            user: { $arrayElemAt: ["$matchedUser", 0] }, // Add user details here
+            discipline: { $arrayElemAt: ["$matchedDiscipline", 0] },
             notes: "$shifts.shootingSessions.notes",
             place: "$shifts.shootingSessions.place",
+            shootingSessions: "$shifts.shootingSessions",
+            shiftNumber: "$shifts.shiftNumber",
           },
         },
       },
+
+      
       {
         $addFields: {
           Shiftref: {
@@ -173,17 +213,34 @@ module.exports.getcompetitions = async () => {
 
       {
         $group: {
-          _id: "$_id",
+          _id: { _id: "$_id", shiftNumber: "$shootingRangesObject.shiftNumber" },
+          name: { $first: "$name" },
+          description: { $first: "$description" },
+          startDate: { $first: "$startDate" },
+          endDate: { $first: "$endDate" },
+          shootingSessions: { $push: "$shootingRangesObject" },
+          shiftStartDate: { $first: "$shifts.shiftRefrees.start" },
+          shiftEndDate: { $first: "$shifts.shiftRefrees.end" },
+          staff: { $first: "$staff" },
+          shootingRanges: { $first: "$shootingRanges" },
+          disciplines: { $first: "$disciplines" },
+          shooters: { $first: "$shooters" },
+        },
+      },
+      
+      {
+        $group: {
+          _id: "$_id._id",
           name: { $first: "$name" },
           description: { $first: "$description" },
           startDate: { $first: "$startDate" },
           endDate: { $first: "$endDate" },
           shifts: {
             $push: {
-              shiftNumber: "$shifts.shiftNumber",
-              shiftRefrees: "$Shiftref",
-              disciplines: "$shifts_disciplines",
-              shootingSessions:"$shootingRangesObject" ,
+              shiftNumber: "$_id.shiftNumber",
+              shootingSessions: "$shootingSessions",
+              start: "$shiftStartDate",
+              end: "$shiftEndDate",
             },
           },
           staff: { $first: "$staff" },
@@ -192,6 +249,7 @@ module.exports.getcompetitions = async () => {
           shooters: { $first: "$shooters" },
         },
       },
+       
       {
         $project: {
           _id: 1,
@@ -426,6 +484,7 @@ module.exports.deletestaffOther = async (item_id, data) => {
     );
   }
 };
+// shift add
 module.exports.adddshifts = async (item_id, data) => {
   try {
     const Comp = await competitionModel.findOneAndUpdate(
@@ -548,3 +607,37 @@ module.exports.getInformation = async () => {
     totalcompetitions,
   });
 };
+module.exports.editResult = async (competitionID, shootingSessionID, data) => {
+  try {
+    // Find the competition by ID and update the result field in the specified shooting session
+    const updatedCompetition = await competitionModel.findOneAndUpdate(
+      {
+        _id: competitionID,
+        "shifts.shootingSessions._id": shootingSessionID,
+      },
+      {
+        $set: {
+          "shifts.$[].shootingSessions.$[session].results": data,
+        },
+      },
+      {
+        arrayFilters: [{ "session._id": shootingSessionID }],
+        new: true,
+      }
+    );
+
+    if (!updatedCompetition) {
+      return result(true, "Competition or shooting session not found" + " competitionID:" + competitionID + " shootingSessionID:" + shootingSessionID + " data:" + data, null);
+    }
+
+    return result(false, "Result updated successfully", updatedCompetition);
+  } catch (error) {
+    console.log(error.message);
+    return result(
+      true,
+      `${__dirname} editResult function => ${error.message}`,
+      null
+    );
+  }
+};
+

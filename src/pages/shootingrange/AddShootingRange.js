@@ -65,15 +65,15 @@ function AddShootingRange({ open, handleClose, title }) {
         <p data-style="title">{title}</p>
 
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <TextField size="small" {...register("name")} label="name" />
+          <TextField size="small" {...register("name")} label="Název střelnice" />
           <TextField
             size="small"
             {...register("provozovatel")}
-            label="provozovatel"
+            label="Provozovatel"
           />
           <FormControl variant="filled" sx={{ m: 1, minWidth: 250 }}>
             <InputLabel id="demo-simple-select-filled-label">
-              Responsible Person
+              Odpovědná osoba
             </InputLabel>
             <Select
               labelId="demo-simple-select-filled-label"
@@ -92,7 +92,7 @@ function AddShootingRange({ open, handleClose, title }) {
             </Select>
           </FormControl>
           <Button size="medium" variant="contained" type="submit">
-            add
+            Přidat střelnici
           </Button>
         </form>
       </div>
